@@ -1,0 +1,44 @@
+<html>
+<head>
+</head>
+<body>
+
+<h1>Am I going to pay estate tax?</h1>
+
+<p>
+Please type in the estimated value of your estate, in dollars.
+</p>
+
+<input id="networth">
+
+<button type="button" onclick="estateTaxOwed()">Show me my tax!</button>
+
+<p id="demo"> </p>
+<script>
+function estateTaxOwed() {
+
+	var limit = 5450000;
+	var x , text ;
+	var tax, adjustedEstateValue ;
+
+	estateValue = document.getElementById("networth").value;
+
+	adjustedEstateValue = estateValue - limit ;
+
+	if (adjustedEstateValue  < 0 ) {
+		tax = 0 ;
+		text = "You're not gonna pay nothin!" ;
+	} else {
+		tax = adjustedEstateValue * 0.4 ;
+		effectiveRate = (tax / estateValue)  * 100;
+		text = "You're going to pay taxes on " + adjustedEstateValue + " of your estate.\n"
+		text += "You're gonna pay " + tax + " for an effective tax rate of " + effectiveRate + "%." ;
+	}
+	document.getElementById("demo").innerHTML = text ;
+}
+
+</script>
+
+</body>
+</html>
+
