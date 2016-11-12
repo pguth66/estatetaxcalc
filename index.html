@@ -36,7 +36,7 @@ function estateTaxOwed() {
 
 	accounting.settings.currency.precision=0 ;
 
-	estateValue = Number(document.getElementById("networth").value);
+	estateValue = document.getElementById("networth").value;
 
 	try {
 		if(isNaN(estateValue)) throw "Please enter a number.";
