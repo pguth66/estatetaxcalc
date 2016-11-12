@@ -1,11 +1,20 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <title>Calculate your estate tax</title>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body>
 
-<h1>How much will I pay in estate tax?</h1>
+<header class="w3-container w3-theme w3-padding" id="myHeader">
+<div class="w3-center">
+<h1 class="w3-xxxlarge">How much will I pay in estate tax?</h1>
+</div>
+</header>
 
+<div class="w3-padding w3-white">
 <p>
 Please type in the estimated value of your estate, in dollars, then hit the button.
 </p>
@@ -15,6 +24,7 @@ Please type in the estimated value of your estate, in dollars, then hit the butt
 <button type="button" onclick="estateTaxOwed()">Show me my tax!</button>
 
 <p id="demo"> </p>
+</div>
 <script>
 function estateTaxOwed() {
 
@@ -33,7 +43,7 @@ function estateTaxOwed() {
 		tax = adjustedEstateValue * 0.4 ;
 		effectiveRate = (tax / estateValue)  * 100;
 		remainingEstate = estateValue - tax ;
-		text = "You're going to pay taxes on $" + adjustedEstateValue.toFixed(2) + " of your estate.\n" ;
+		text = "You're going to pay taxes on $" + adjustedEstateValue.toFixed(2) + " of your estate. " ;
 		text += "You're gonna pay $" + tax.toFixed(2) + " for an effective tax rate of " + effectiveRate.toFixed(2) + "%." ;
 		text += "After paying the tax, your estate will be worth $" + remainingEstate.toFixed(2) + ".";
 	}
