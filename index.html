@@ -25,12 +25,16 @@ Please type in the estimated value of your estate, in dollars, then hit the butt
 
 <p id="demo"> </p>
 </div>
+<script src="js/accounting.js">
+</script>
 <script>
 function estateTaxOwed() {
 
 	var limit = 5450000;
 	var x , text ;
 	var tax, adjustedEstateValue ;
+
+	accounting.settings.currency.precision=0 ;
 
 	estateValue = document.getElementById("networth").value;
 
@@ -43,9 +47,9 @@ function estateTaxOwed() {
 		tax = adjustedEstateValue * 0.4 ;
 		effectiveRate = (tax / estateValue)  * 100;
 		remainingEstate = estateValue - tax ;
-		text = "You're going to pay taxes on $" + adjustedEstateValue.toFixed(2) + " of your estate. " ;
-		text += "You're gonna pay $" + tax.toFixed(2) + " for an effective tax rate of " + effectiveRate.toFixed(2) + "%." ;
-		text += "After paying the tax, your estate will be worth $" + remainingEstate.toFixed(2) + ".";
+		text = "You're going to pay taxes on " + accounting.formatMoney(adjustedEstateValue) + " of your estate.<br>" ;
+		text += "You're gonna pay " + accounting.formatMoney(tax) + " for an effective tax rate of " + effectiveRate.toFixed(2) + "%.<br>" ;
+		text += "After paying the tax, your estate will be worth " + accounting.formatMoney(remainingEstate) + ".";
 	}
 	document.getElementById("demo").innerHTML = text ;
 }
