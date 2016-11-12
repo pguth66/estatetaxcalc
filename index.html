@@ -31,8 +31,10 @@ function estateTaxOwed() {
 	} else {
 		tax = adjustedEstateValue * 0.4 ;
 		effectiveRate = (tax / estateValue)  * 100;
-		text = "You're going to pay taxes on $" + adjustedEstateValue.toFixed(2) + " of your estate.\n"
+		remainingEstate = estateValue - tax ;
+		text = "You're going to pay taxes on $" + adjustedEstateValue.toFixed(2) + " of your estate.\n" ;
 		text += "You're gonna pay $" + tax.toFixed(2) + " for an effective tax rate of " + effectiveRate.toFixed(2) + "%." ;
+		text += "After paying the tax, your estate will be worth $" + remainingEstate.toFixed(2) + ".";
 	}
 	document.getElementById("demo").innerHTML = text ;
 }
