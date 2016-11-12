@@ -19,7 +19,7 @@
 Please type in the estimated value of your estate, in dollars, then hit the button.
 </p>
 
-<input id="networth" type="number" min="0" max="10000000000" required>
+<input id="networth" type="number" min="0" max="10000000000" step="100000" required>
 
 <button type="button" onclick="estateTaxOwed()">Show me my tax!</button>
 
@@ -30,7 +30,7 @@ Please type in the estimated value of your estate, in dollars, then hit the butt
 <script>
 function estateTaxOwed() {
 
-	var limit = 5450000;
+	var limit = 5450000; // 2016 limit
 	var x , text ;
 	var tax, adjustedEstateValue = 0 ;
 
@@ -38,32 +38,32 @@ function estateTaxOwed() {
 
 	estateValue = Number(document.getElementById("networth").value);
 
-	console.log("estateValue is " + estateValue + ", type " + typeof(estateValue) );
 	try {
 		if(isNaN(estateValue)) throw "Please enter a number.";
 		if(estateValue < 0) throw "Can't have negative estate value.";
 		if(estateValue > 10000000000) throw "You can't have that much money!";
+
+		adjustedEstateValue = estateValue - limit ;
+
+		if (adjustedEstateValue  < 0 ) {
+			tax = 0 ;
+			text = "You're not gonna pay nothin!" ;
+		} else {
+			tax = adjustedEstateValue * 0.4 ;
+			effectiveRate = (tax / estateValue)  * 100;
+			remainingEstate = estateValue - tax ;
+			text = "Your estimated estate value is " + accounting.formatMoney(estateValue) + ". <br>";
+			text += "You're gonna pay " + accounting.formatMoney(tax) + " for an effective tax rate of " + effectiveRate.toFixed(2) + "%.<br>" ;
+			text += "You're going to pay taxes on " + accounting.formatMoney(adjustedEstateValue) + " of your estate.<br>" ;
+			text += "After paying the tax, your estate will still be worth " + accounting.formatMoney(remainingEstate) + ".";
+		}
 	}
 	catch(err) {
-		console.log(err.message);
+		console.log(err);
 		text = err ; 
 	}
-
-	adjustedEstateValue = estateValue - limit ;
-
-	if (adjustedEstateValue  < 0 ) {
-		tax = 0 ;
-		text = "You're not gonna pay nothin!" ;
-	} else {
-		tax = adjustedEstateValue * 0.4 ;
-		effectiveRate = (tax / estateValue)  * 100;
-		remainingEstate = estateValue - tax ;
-		text = "Your estimated estate value is " + accounting.formatMoney(estateValue) + ". <br>";
-		text += "You're gonna pay " + accounting.formatMoney(tax) + " for an effective tax rate of " + effectiveRate.toFixed(2) + "%.<br>" ;
-		text += "You're going to pay taxes on " + accounting.formatMoney(adjustedEstateValue) + " of your estate.<br>" ;
-		text += "After paying the tax, your estate will still be worth " + accounting.formatMoney(remainingEstate) + ".";
-	}
 	document.getElementById("demo").innerHTML = text ;
+
 }
 
 </script>
