@@ -19,7 +19,7 @@
 Please type in the estimated value of your estate, in dollars, then hit the button.
 </p>
 
-<input id="networth">
+<input id="networth" type="number" min="0" max="10000000000" required>
 
 <button type="button" onclick="estateTaxOwed()">Show me my tax!</button>
 
@@ -32,11 +32,22 @@ function estateTaxOwed() {
 
 	var limit = 5450000;
 	var x , text ;
-	var tax, adjustedEstateValue ;
+	var tax, adjustedEstateValue = 0 ;
 
 	accounting.settings.currency.precision=0 ;
 
-	estateValue = document.getElementById("networth").value;
+	estateValue = Number(document.getElementById("networth").value);
+
+	console.log("estateValue is " + estateValue + ", type " + typeof(estateValue) );
+	try {
+		if(isNaN(estateValue)) throw "Please enter a number.";
+		if(estateValue < 0) throw "Can't have negative estate value.";
+		if(estateValue > 10000000000) throw "You can't have that much money!";
+	}
+	catch(err) {
+		console.log(err.message);
+		text = err ; 
+	}
 
 	adjustedEstateValue = estateValue - limit ;
 
@@ -47,15 +58,14 @@ function estateTaxOwed() {
 		tax = adjustedEstateValue * 0.4 ;
 		effectiveRate = (tax / estateValue)  * 100;
 		remainingEstate = estateValue - tax ;
-		text = "You're going to pay taxes on " + accounting.formatMoney(adjustedEstateValue) + " of your estate.<br>" ;
+		text = "Your estimated estate value is " + accounting.formatMoney(estateValue) + ". <br>";
 		text += "You're gonna pay " + accounting.formatMoney(tax) + " for an effective tax rate of " + effectiveRate.toFixed(2) + "%.<br>" ;
-		text += "After paying the tax, your estate will be worth " + accounting.formatMoney(remainingEstate) + ".";
+		text += "You're going to pay taxes on " + accounting.formatMoney(adjustedEstateValue) + " of your estate.<br>" ;
+		text += "After paying the tax, your estate will still be worth " + accounting.formatMoney(remainingEstate) + ".";
 	}
 	document.getElementById("demo").innerHTML = text ;
 }
 
 </script>
-
-</body>
 </html>
 
