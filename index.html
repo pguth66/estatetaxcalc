@@ -25,7 +25,13 @@ Please type in the estimated value of your estate, in dollars, then hit the butt
 
 <p id="demo"> </p>
 </div>
+<div class="w3-container">
+<div id="tableholder" class="w3-responsive w3-card-4">
+</div>
+</div>
 <script src="js/accounting.js">
+</script>
+<script src="js/drawtable.js">
 </script>
 <script>
 function estateTaxOwed() {
@@ -36,7 +42,7 @@ function estateTaxOwed() {
 
 	accounting.settings.currency.precision=0 ;
 
-	estateValue = document.getElementById("networth").value;
+	var estateValue = document.getElementById("networth").value;
 
 	try {
 		if(isNaN(estateValue)) throw "Please enter a number.";
@@ -56,6 +62,7 @@ function estateTaxOwed() {
 			text += "You're gonna pay " + accounting.formatMoney(tax) + " for an effective tax rate of " + effectiveRate.toFixed(2) + "%.<br>" ;
 			text += "You're going to pay taxes on " + accounting.formatMoney(adjustedEstateValue) + " of your estate.<br>" ;
 			text += "After paying the tax, your estate will still be worth " + accounting.formatMoney(remainingEstate) + ".";
+			drawTable(estateValue, tax, adjustedEstateValue, remainingEstate);
 		}
 	}
 	catch(err) {
