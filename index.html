@@ -38,12 +38,14 @@ function estateTaxOwed() {
 
 	var limit = 5450000; // 2016 limit
 	var x , text ;
-	var tax, adjustedEstateValue = 0 ;
+	var tax = 0, adjustedEstateValue = 0 ;
 	var effectiveRate = 0 ;
-
 	accounting.settings.currency.precision=0 ;
 
 	var estateValue = document.getElementById("networth").value;
+
+	// clear this in case someone entered a number below the threshold and now enters one over
+	document.getElementById("demo").innerHTML="";
 
 	try {
 		if(isNaN(estateValue)) throw "Please enter a number.";
@@ -55,17 +57,13 @@ function estateTaxOwed() {
 		if (adjustedEstateValue  < 0 ) {
 			remainingEstate = estateValue ;
 			adjustedEstateValue = 0 ;
-			text = "You're not gonna pay nothin!" ;
 			console.log("value of effectiveRate is " + effectiveRate);
 			drawTable(estateValue, tax, effectiveRate, adjustedEstateValue, remainingEstate);
+			document.getElementById("demo").innerHTML = "You will owe <strong>no</strong> estate tax.";
 		} else {
 			tax = adjustedEstateValue * 0.4 ;
 			effectiveRate = (tax / estateValue)  * 100;
 			remainingEstate = estateValue - tax ;
-			text = "Your estimated estate value is " + accounting.formatMoney(estateValue) + ". <br>";
-			text += "You're gonna pay " + accounting.formatMoney(tax) + " for an effective tax rate of " + effectiveRate.toFixed(2) + "%.<br>" ;
-			text += "You're going to pay taxes on " + accounting.formatMoney(adjustedEstateValue) + " of your estate.<br>" ;
-			text += "After paying the tax, your estate will still be worth " + accounting.formatMoney(remainingEstate) + ".";
 			drawTable(estateValue, tax, effectiveRate, adjustedEstateValue, remainingEstate);
 		}
 	}
@@ -73,7 +71,6 @@ function estateTaxOwed() {
 		console.log(err);
 		text = err ; 
 	}
-	document.getElementById("demo").innerHTML = text ;
 
 }
 
