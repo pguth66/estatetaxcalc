@@ -59,7 +59,7 @@ function estateTaxOwed() {
 			adjustedEstateValue = 0 ;
 			console.log("value of effectiveRate is " + effectiveRate);
 			drawTable(estateValue, tax, effectiveRate, adjustedEstateValue, remainingEstate);
-			document.getElementById("demo").innerHTML = "You will owe <strong>no</strong> estate tax.";
+			document.getElementById("demo").innerHTML = "You will owe <strong>no</strong> estate tax. Your estate could grow by " + accounting.formatMoney(( limit - estateValue )) + " before being subject to any tax.";
 		} else {
 			tax = adjustedEstateValue * 0.4 ;
 			effectiveRate = (tax / estateValue)  * 100;
