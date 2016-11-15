@@ -12,7 +12,7 @@ function createRow (cell1text, cell2text, tblBody) {
 	tblBody.appendChild(row);
 }
 
-function drawTable (estateValue, tax, adjustedEstateValue, remainingEstate) {
+function drawTable (estateValue, tax, effectiveRate, adjustedEstateValue, remainingEstate) {
 //	var body = document.getElementsByTagName("body")[0];
 	var tableHolder = document.getElementById("tableholder");
 

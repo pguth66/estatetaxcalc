@@ -39,6 +39,7 @@ function estateTaxOwed() {
 	var limit = 5450000; // 2016 limit
 	var x , text ;
 	var tax, adjustedEstateValue = 0 ;
+	var effectiveRate = 0 ;
 
 	accounting.settings.currency.precision=0 ;
 
@@ -52,8 +53,11 @@ function estateTaxOwed() {
 		adjustedEstateValue = estateValue - limit ;
 
 		if (adjustedEstateValue  < 0 ) {
-			tax = 0 ;
+			remainingEstate = estateValue ;
+			adjustedEstateValue = 0 ;
 			text = "You're not gonna pay nothin!" ;
+			console.log("value of effectiveRate is " + effectiveRate);
+			drawTable(estateValue, tax, effectiveRate, adjustedEstateValue, remainingEstate);
 		} else {
 			tax = adjustedEstateValue * 0.4 ;
 			effectiveRate = (tax / estateValue)  * 100;
@@ -62,7 +66,7 @@ function estateTaxOwed() {
 			text += "You're gonna pay " + accounting.formatMoney(tax) + " for an effective tax rate of " + effectiveRate.toFixed(2) + "%.<br>" ;
 			text += "You're going to pay taxes on " + accounting.formatMoney(adjustedEstateValue) + " of your estate.<br>" ;
 			text += "After paying the tax, your estate will still be worth " + accounting.formatMoney(remainingEstate) + ".";
-			drawTable(estateValue, tax, adjustedEstateValue, remainingEstate);
+			drawTable(estateValue, tax, effectiveRate, adjustedEstateValue, remainingEstate);
 		}
 	}
 	catch(err) {
