@@ -16,6 +16,10 @@ function drawTable (estateValue, tax, adjustedEstateValue, remainingEstate) {
 //	var body = document.getElementsByTagName("body")[0];
 	var tableHolder = document.getElementById("tableholder");
 
+	if ( document.getElementById("taxtable") ) {
+		tableHolder.removeChild(document.getElementById("taxtable"));
+	}
+
 	var tbl = document.createElement("table");
 	var tblBody = document.createElement("tbody");
 
