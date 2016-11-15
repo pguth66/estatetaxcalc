@@ -26,6 +26,7 @@ function drawTable (estateValue, tax, adjustedEstateValue, remainingEstate) {
 	tbl.id="taxtable";
 	tbl.className+="w3-table w3-table-all w3-bordered w3-striped";
 	createRow("Estimated estate value", accounting.formatMoney(estateValue), tblBody);
+	createRow("Value of estate subject to tax", accounting.formatMoney(adjustedEstateValue), tblBody);
 	createRow("Tax you will pay", accounting.formatMoney(tax), tblBody);
 	createRow("Effective tax rate", effectiveRate.toFixed(2) +"%", tblBody);
 	createRow("Remaining value of estate after paying tax", accounting.formatMoney(remainingEstate), tblBody);
