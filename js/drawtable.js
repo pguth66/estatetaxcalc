@@ -33,5 +33,6 @@ function drawTable (estateValue, tax, effectiveRate, adjustedEstateValue, remain
 
 	tbl.appendChild(tblBody);
 	tableHolder.appendChild(tbl);
+
 }
 

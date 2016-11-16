@@ -25,9 +25,18 @@ Please type in the estimated value of your estate, in dollars, then hit the butt
 
 <p id="demo"> </p>
 </div>
-<div class="w3-container">
 <div id="tableholder" class="w3-responsive w3-card-4">
 </div>
+<style>
+div.hidden {
+	display: none
+}
+</style>
+<div id="footer" class="w3-container w3-footer hidden">
+<p>
+In 2016, estates under $5,450,000 pay no estate tax. See <cite>Instructions for Form 706</cite>, Internal Revenue Service, accessed Nov 15, 2016, <a href="https://www.irs.gov/instructions/i706/ch01.html#d0e148">https://www.irs.gov/instructions/i706/ch01.html#d0e148</a>
+
+</p>
 </div>
 <script src="js/accounting.js">
 </script>
@@ -46,6 +55,8 @@ function estateTaxOwed() {
 
 	// clear this in case someone entered a number below the threshold and now enters one over
 	document.getElementById("demo").innerHTML="";
+	// hide the note in case we're redrawing the table
+	document.getElementById("footer").style.display = "none";
 
 	try {
 		if(isNaN(estateValue)) throw "Please enter a number.";
@@ -60,6 +71,8 @@ function estateTaxOwed() {
 			console.log("value of effectiveRate is " + effectiveRate);
 			drawTable(estateValue, tax, effectiveRate, adjustedEstateValue, remainingEstate);
 			document.getElementById("demo").innerHTML = "You will owe <strong>no</strong> estate tax. Your estate could grow by " + accounting.formatMoney(( limit - estateValue )) + " before being subject to any tax.";
+			// make the note appear if no tax is owed
+		  document.getElementById("footer").style.display = "block";
 		} else {
 			tax = adjustedEstateValue * 0.4 ;
 			effectiveRate = (tax / estateValue)  * 100;
