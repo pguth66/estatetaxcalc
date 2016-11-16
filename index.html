@@ -23,25 +23,38 @@ Please type in the estimated value of your estate, in dollars, then hit the butt
 
 <button type="button" onclick="estateTaxOwed()">Show me my tax!</button>
 
+<!-- this is where the message about owing no tax will show up -->
 <p id="demo"> </p>
 </div>
+
+<!-- this is where the table showing the tax will appear -->
 <div id="tableholder" class="w3-responsive w3-card-4">
 </div>
+
+<!-- for showing the notes only after someone types in their number -->
 <style>
 div.hidden {
 	display: none
 }
 </style>
+
+<!-- notes go here in the footer -->
 <div id="footer" class="w3-container w3-footer hidden">
 <p>
 In 2016, estates under $5,450,000 pay no estate tax. See <cite>Instructions for Form 706</cite>, Internal Revenue Service, accessed Nov 15, 2016, <a href="https://www.irs.gov/instructions/i706/ch01.html#d0e148">https://www.irs.gov/instructions/i706/ch01.html#d0e148</a>
 
 </p>
 </div>
+
+<!-- functions to format money -->
 <script src="js/accounting.js">
 </script>
+
+<!-- functions to draw and populate the table of results -->
 <script src="js/drawtable.js">
 </script>
+
+<!-- functions to calculate the tax etc -->
 <script src="js/estatetax.js">
 </script>
 </html>

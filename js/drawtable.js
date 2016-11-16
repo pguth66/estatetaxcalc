@@ -13,9 +13,10 @@ function createRow (cell1text, cell2text, tblBody) {
 }
 
 function drawTable (estateValue, tax, effectiveRate, adjustedEstateValue, remainingEstate) {
-//	var body = document.getElementsByTagName("body")[0];
-	var tableHolder = document.getElementById("tableholder");
 
+	var tableHolder = document.getElementById("tableholder"); // element of page to put the table into
+
+	// if we've already drawn a table, this deletes it so we can draw a new one
 	if ( document.getElementById("taxtable") ) {
 		tableHolder.removeChild(document.getElementById("taxtable"));
 	}
